@@ -5,8 +5,6 @@
 
 Documentation	Creating, Viewing, Editing and Deleting the Project
 
-# TODO: Write Precondition, Postcondition, Tags
-
 Pre Condition	Open Browser, Authenticated
 Post Condition	Log-out, Close Browser
 Tags Project-Editing, Project-Creation, Project-Deletion

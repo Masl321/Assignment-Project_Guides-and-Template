@@ -3,9 +3,7 @@
 
 *** Settings ***
 
-Documentation	Testing the register functionality. 
-				Register scenario with valid creation, already existing account
-				and invalid Password strength.
+Documentation	Testing the register functionality. Register scenario with valid creation, already existing account and invalid Password strength.
 
 Pre Condition	Open browser
 Post Condition	Close all browsers
@@ -32,8 +30,6 @@ Empty=
 #******************** Test Cases *************************
 
 *** Test Case ***
-
-# TODO: Write Positive and Negative Test Cases and Test Process steps (Think about possible test cases)
 
 # Positive Tests
 
