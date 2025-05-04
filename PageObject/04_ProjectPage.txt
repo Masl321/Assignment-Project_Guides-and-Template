@@ -3,15 +3,13 @@
 
 *** Settings ***
 
-# TODO: Write Dcocumentation e.g. Project Test scenario. CRUD Operation: Create, Read, Update, Delete
-
-Documentation	
+Documentation	Creating, Viewing, Editing and Deleting the Project
 
 # TODO: Write Precondition, Postcondition, Tags
 
-Pre Condition	 
-Post Condition	
-Tags
+Pre Condition	Open Browser, Authenticated
+Post Condition	Log-out, Close Browser
+Tags Project-Editing, Project-Creation, Project-Deletion
 
 #******************* Common Variables ********************
 
@@ -19,26 +17,89 @@ Tags
 
 # NOTE: Please Remove your login credential before uploading Assignments
 
-# TODO: Write Project creation field variables
-
-
+ProjectName=test
+ExistingProjectName=test_3
+ProjectNameUpdated=test_2
+GroupName=dhbw-marcel
+ProjectUrl=https://gitlab/${GroupName}/${ProjectName}
+defaultConfig={
+	"Initialize repository with a README":true,
+	"Enable Static Application Security Testing (SAST)":false
+}
+ProjectPath=${GroupName}/${ProjectName}
 
 #******************** Test Cases *************************
 
 *** Test Case ***
 
-# TODO: Write Positive and Negative Test Cases and Test Process steps
+# Positive Tests
 
-# Positive Test examples are below write test process steps for each below test case
+Create blank project
+	Initiate the project creation, by pressing the plus sign top left in the navbar next to the user profile.
+	press the "New project/repository" button
+	press the create blank project button
+	Input ProjectName			ProjectName
+	Select Groupname in Project Url dropdown GroupName
+	Leave Deployment target on default value "none"
+	Select visibility public
+	Leave Project Config on		defaultConfig
+	Submit Create Project
+	Verify that page shows newly created repository, that contains only a README file
 
-	Create blank project
-	Create template project 
-	Update name of template project
-	Delete template project
-	Valide that message is showing Project 'First project ' was successfully created.
+Delete Project
+	On the project page select settings in the navbar
+	in the dropdown select general
+	Verify Page shows general settings
+	Scroll all the way down to "advanced"
+	open dropdown "advanced"
+	scroll to delete button
+	press delete project
+	Verify Page shows a confirmation page asking user to enter the project path
+	Input Project Path	ProjectPath
+	Press "Yes, delete project"
+	Verify page shows readonly project pending Deletion
+	Verify page shows banner explaining the project status and its scheduled deletion time
 
-# Negative Test examples are below write test process steps for each below test case
+Update name of project
+	On the project page select settings in the navbar
+	in the dropdown select general
+	Input new project name	ProjectNameUpdated
+	press save changes
+	Verify page reloads and shows the new Project name
+	Verify that ProjectUrl now is "https://gitlab/${GroupName}/${ProjectNameUpdated}
 
-	Create a blank project with the previous same name
+Create Template Project
+	Initiate the project creation, by pressing the plus sign top left in the navbar next to the user profile.
+	press the "New project/repository" button
+	Select Create from Template
+	Select Spring Template
+	Input ProjectName	ProjectName
+	Select Groupname in Project Url dropdown GroupName
+	Leave Deployment target on default value "none"
+	Select visibility public
+	Submit Create Project
+	Verify that Page shows a repository containing the following items:
+	- a "src" folder
+	- a .mvn folder
+	- a .gitingore file
+	- a dockerfile
+	- a license file
+	- a contribution rules file
+	- a README
+	- mvnw and mvnwcmd files 
+	- pom.xml
+	! Order might differ !
 
+# Negative Tests
 
+Create repository with existing name in the same group
+	Initiate the project creation, by pressing the plus sign top left in the navbar next to the user profile.
+	press the "New project/repository" button
+	press the create blank project button
+	Input project name			ExistingProjectName
+	Select Groupname in Project Url dropdown GroupName
+	Leave Deployment target on default "none"
+	Input visibility private
+	Select Configuration		defaultConfig
+	Submit Create Project
+	Verify that an error banner shows up explaining that the path has already been taken.

@@ -10,11 +10,11 @@ Last modified: 05.04.2024
 
 # Assignment Deliverables
 
-- [ ] Create Test cases for all pages which are already there in project's **PageObject** folder
-  - [ ] 03_RegisterPage
-  - [ ] 04_ProjectPage
-  - [ ] 05_IssuePage
-- [ ] Perform all **TODO:** tasks describe in each above pages
+- [x] Create Test cases for all pages which are already there in project's **PageObject** folder
+  - [x] 03_RegisterPage
+  - [x] 04_ProjectPage
+  - [x] 05_IssuePage
+- [x] Perform all **TODO:** tasks describe in each above pages
 - [x] Create bug report for one test case which are already there in project's BugReport folder
   - [x] 02_ProjectPageReport
 - [ ] Write Learning Reflection page

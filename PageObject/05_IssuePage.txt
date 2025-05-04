@@ -2,13 +2,11 @@
 #******************** Settings ************************
 
 *** Settings ***
-Documentation	Issue Test scenario. CRUD Operation: Create, Read, Update, Delete
+Documentation	Create, Edit, View and Delete Issue Tickets
 
-# TODO: Write Precondition and Postcondition, Tags 
-
-Pre Condition	Tips: Project must be created by the user before 
-Post Condition	
-Tags
+Pre Condition	Open Browser, Authenticate, Create Project, Navigate to Issue Page
+Post Condition	Delete Project, Logout, Close Browser
+Tags Issue-Edit, Issue-Create, Issue-Delete
 
 #******************* Common Variables ********************
 
@@ -17,19 +15,68 @@ Tags
 
 # NOTE: Please Remove your login credential before uploading Assignments
 
-# TODO: Write Issue creation field variables, Updated name of the issue
-
-
+ProjectName=test
+IssueType=Issue
+IssueTitle="Test Issue"
+IssueDescription=""" 
+	This is a test description.
+	Lorem Ipsum [...]
+"""
+IssueComment="""
+	Hello xyz,
+	I am sorry to hear of your Issue.
+	Could you elaborate on what happened when the Issue arose?
+"""
+UpdatedIssueName="Everything broke!!!"
+CloseComment=" We fixed the Issue. "
 
 #******************** Test Cases *************************
 
 *** Test Case ***
 
-# TODO: Write Positive Test Cases and Test Process steps
+# Positive Test
+	
+Create Issue
+	Select Project for issue on button
+	new Issue in Project	ProjectName
+	Select Type				IssueType
+	Input Title				IssueTitle
+	Input description		IssueDescription
+	Submit Create Issue
+	Verify Page now displays newly created Issue
 
-# Positive Test examples are below write test process steps for each below test case
+Comment Issue
+	Navigate to an open Issue
+	Input Comment in the Activity Section	IssueComment
+	Verify Page now displays comment in Activity Section
 
-	Create issue,
- 	Update name of issue, 
-	Create second issue with privious updated name
-    Delete first issue
+Update Issue Name
+	Navigate to an open Issue
+	Press Edit
+	Input Title		UpdatedIssueName
+	Submit Save Changes
+	Verify Issue now has the new name
+
+Close Issue without Comment
+	Navigate to an open Issue
+	Press Close Issue
+	Verify Issue is now closed without comment
+
+Reopen Issue without comment
+	Navigate to an open Issue
+	Press Reopen Issue
+	Verify Activity shows that the issue has been reopened without comment
+
+Close Issue with Comment
+	Navigate to an open Issue
+	Input Comment in the Activity Section	CloseComment
+	Press Comment & close Issue
+	verify that the issue has been closed with the added comment
+
+Delete Issue
+	Navigate to an Issue
+	Select the hamburger menu next to Edit
+	Select Delete Issue
+	Verify confirmation popup asking if the user is sure
+	Delete Issue
+	Verify Page redirect to all issues where Issue is no longer listed

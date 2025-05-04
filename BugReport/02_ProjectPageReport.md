@@ -7,7 +7,8 @@ When choosing a template during project creation, the option that should say "bl
 
 1. If not already done log-in to an account
 2. Initiate the project creation, by pressing the plus sign top left in the navbar next to the user profile.
-3. The bug is now visible on this page
+3. press the "New project/repository" button
+4. The bug is now visible on this page
 
 ## What is the current bug behavior?
 
